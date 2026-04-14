@@ -57,7 +57,7 @@ Generate the <Layout> tag following this EXACT structure:
               ]
             }
           ])
-        }}
+        }}2
       />
 
       <script
@@ -197,29 +197,54 @@ ${input}
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight flex items-center justify-center gap-2">
-            <span className="text-indigo-400">✨</span>
-            TestMu AI Content
+            TestMu Formatter
           </h1>
           <p className="text-gray-400 mt-3 text-sm sm:text-base">
-            Generate clean, structured TestMu blocks instantly with AI
+            Generate clean, structured TestMu style content.
           </p>
         </div>
 
         {/* Input Card */}
         <div className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
 
-          <input
-            type="password"
-            placeholder="Enter Gemini API Key"
-            onChange={(e) => setApiKey(e.target.value)}
-            className="w-full p-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-          />
+          <div className="flex items-center justify-center gap-4">
+            <input
+              type="password"
+              value={apiKey}
+              placeholder="Enter Gemini API Key"
+              onChange={(e) => setApiKey(e.target.value)}
+              className="w-full p-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+            />
+            <button
+              type="button"
+              className="cursor-pointer flex items-center py-2 rounded-md px-3 border border-white/10 hover:border-white/50 gap-4 disabled:hover:border-white/10 transition disabled:cursor-not-allowed"
+              onClick={() => setApiKey('')}
+              title="Clear"
+              disabled={!apiKey}
+            >
+              <span className="text-red-400">Clear</span>
+            </button>
+          </div>
 
-          <textarea
-            placeholder="Paste Google Doc Content Here..."
-            onChange={(e) => setInput(e.target.value)}
-            className="w-full p-3 h-40 sm:h-52 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-          />
+          <div className=" relative flex justify-center gap-4">
+            <textarea
+            value={input}
+              placeholder="Paste Google Doc Content Here..."
+              onChange={(e) => setInput(e.target.value)}
+              className="w-full p-3 h-40 sm:h-52 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+            />
+            {input && (
+              <div claassName="absolute top-0 right-0 pr-3 flex items-center">
+              <button
+                type="button"
+                className=" cursor-pointer flex items-center py-2 rounded-md px-3 border border-white/10 hover:border-white/50 gap-4 disabled:hover:border-white/10 transition disabled:cursor-not-allowed"
+                onClick={() => setInput('')}
+              >
+                <span className="text-red-400">Clear</span>
+              </button>
+              </div>
+            )}
+          </div>
 
           <button
             onClick={generateContent}
@@ -227,9 +252,9 @@ ${input}
             className="w-full py-3 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:opacity-90 transition font-semibold flex items-center justify-center gap-2 text-sm sm:text-base"
           >
             {loading ? (
-              <span className="animate-pulse">Thinking...</span>
+              <span className="animate-pulse">Generating...</span>
             ) : (
-              "Generate TestMu style code"
+              "Generate code blocks"
             )}
           </button>
         </div>
