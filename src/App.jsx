@@ -204,7 +204,7 @@ ${input}
           </p>
         </div>
 
-        {/* Input Card */}
+        {/* Input */}
         <div className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
 
           <div className="flex items-center justify-center gap-4">
